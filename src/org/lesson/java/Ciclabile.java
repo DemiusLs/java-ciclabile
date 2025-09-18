@@ -4,29 +4,29 @@ import java.util.Random;
 
 public class Ciclabile {
 
-    private int CAPACITA = 10;
-    private int[] arrayInteri= new int[CAPACITA] ;
-    int cicloCount = 0;
+    private int size = 10;
+    private int[] arrayInteri= new int[size] ;
+    int indiceCorrente = 0;
 
     public Ciclabile(){
         generateIntArray();
     }
 
-    public Ciclabile(int CAPACITA){
-        this.CAPACITA = CAPACITA;
+    public Ciclabile(int size){
+        this.size = size;
         generateIntArray();
     }
 
-    public Ciclabile(int[] arrayInteri , int CAPACITA){
+    public Ciclabile(int[] arrayInteri , int size){
         this.arrayInteri = arrayInteri;
-        this.CAPACITA = CAPACITA;
+        this.size = size;
     }
 
     
     public Integer getElementoSuccessivo(){
-        if(cicloCount < arrayInteri.length){
-            int element = arrayInteri[cicloCount];
-            cicloCount++;        
+        if(indiceCorrente < arrayInteri.length){
+            int element = arrayInteri[indiceCorrente];
+            indiceCorrente++;        
             return element;
         }else{ 
             System.out.println("Elementi terminati, resetta il ciclo");
@@ -35,17 +35,17 @@ public class Ciclabile {
     }
 
     public boolean hasAncoraElementi(){
-        if(cicloCount < arrayInteri.length){
-            System.out.println("Ci sono ancora " + (arrayInteri.length - cicloCount ) + "elementi");
+        if(indiceCorrente < arrayInteri.length){
+            System.out.println("Ci sono ancora " + (arrayInteri.length - indiceCorrente ) + "elementi");
             return true;
         }else{
-            System.out.println("Ci sono ancora " + (arrayInteri.length - cicloCount ) + "elementi");
+            System.out.println("Ci sono ancora " + (arrayInteri.length - indiceCorrente ) + "elementi");
             return false;
         }
     }  
 
     public void resetCount(){
-        this.cicloCount = 0;
+        this.indiceCorrente = 0;
     }
 
     public void generateIntArray(){
@@ -63,9 +63,9 @@ public class Ciclabile {
     //     return this.arrayInteri.length;
     // }
     public void cicla(int indice){
-        
+        resetCount();
         if(indice >0 && indice <= arrayInteri.length){
-            for(int i = 0; i < indice   ; i++){
+            for(int i = 0; i < indice ; i++){
             System.out.println(getElementoSuccessivo());
         }
         }else{
@@ -76,20 +76,33 @@ public class Ciclabile {
     
     public void getIntAtIndex(int indice){
         
-        if(indice >0 && indice <= arrayInteri.length){        
+        if(indice >= 0 && indice <= arrayInteri.length){        
             System.out.println("Numero: "+ arrayInteri[indice] + " all'indice: " + indice );
         }else{
             System.out.println("Indice non corretto");
-        }       
-        
-        }
+        }     
+    }
     
+    public void addElemento(int number){
+        this.size ++;
+        int[] newArrayInteri = new int[arrayInteri.length + 1];
+        for(int i = 0 ; i < arrayInteri.length ; i++){
+            newArrayInteri[i] = arrayInteri[i];
+        }
+        newArrayInteri[newArrayInteri.length -1 ] = number;
+        this.arrayInteri = newArrayInteri;
+    }
+    public int getLastIndex(){
+        return this.arrayInteri.length ;
+    }
 
 
     public static void main(String[] args) { 
             
         Ciclabile ciclabile = new Ciclabile();        
-        ciclabile.cicla(10);
+        ciclabile.cicla(ciclabile.arrayInteri.length);  
+        ciclabile.addElemento(33);
+        ciclabile.cicla(ciclabile.arrayInteri.length); 
         ciclabile.getIntAtIndex(3);
         
     }
