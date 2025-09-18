@@ -17,9 +17,9 @@ public class Ciclabile {
         generateIntArray();
     }
 
-    public Ciclabile(int[] arrayInteri , int size){
+    public Ciclabile(int[] arrayInteri ){
         this.arrayInteri = arrayInteri;
-        this.size = size;
+        this.size = arrayInteri.length;
     }
 
     
@@ -35,13 +35,7 @@ public class Ciclabile {
     }
 
     public boolean hasAncoraElementi(){
-        if(indiceCorrente < arrayInteri.length){
-            System.out.println("Ci sono ancora " + (arrayInteri.length - indiceCorrente ) + "elementi");
-            return true;
-        }else{
-            System.out.println("Ci sono ancora " + (arrayInteri.length - indiceCorrente ) + "elementi");
-            return false;
-        }
+        return indiceCorrente < arrayInteri.length;
     }  
 
     public void resetCount(){
@@ -99,9 +93,11 @@ public class Ciclabile {
 
     public static void main(String[] args) { 
             
-        Ciclabile ciclabile = new Ciclabile();        
+        Ciclabile ciclabile = new Ciclabile();
+        System.out.println("Stampo array : ");        
         ciclabile.cicla(ciclabile.arrayInteri.length);  
         ciclabile.addElemento(33);
+        System.out.println("Stampo array : "); 
         ciclabile.cicla(ciclabile.arrayInteri.length); 
         ciclabile.getIntAtIndex(3);
         
